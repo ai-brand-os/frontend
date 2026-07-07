@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "AI Brand OS",
+    "description": "برند خود را با جریان‌های کاری هوشمند بسازید و مدیریت کنید."
+  },
+  "home": {
+    "logoAlt": "لوگوی Next.js",
+    "title": "فرانت‌اند AI Brand OS را بسازید.",
+    "description": "این پروژه با Next.js، TypeScript، Tailwind، shadcn/ui، React Query، react-hook-form، yup و i18n آماده شده است.",
+    "primaryAction": "استقرار",
+    "secondaryAction": "مستندات",
+    "languageLabel": "زبان"
+  }
+}

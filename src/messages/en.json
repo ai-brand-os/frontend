@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "title": "AI Brand OS",
+    "description": "Build and manage your brand with AI-powered workflows."
+  },
+  "home": {
+    "logoAlt": "Next.js logo",
+    "title": "Build your AI Brand OS frontend.",
+    "description": "This project is ready with Next.js, TypeScript, Tailwind, shadcn/ui, React Query, react-hook-form, yup, and i18n.",
+    "primaryAction": "Deploy Now",
+    "secondaryAction": "Documentation",
+    "languageLabel": "Language"
+  }
+}
