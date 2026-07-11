@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import type { Messages } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import type { AuthFormValues, AuthMode } from "@/hooks/use-auth-form";
+import type { AuthFormValues, AuthMode } from "@/components/auth/useAuthForm";
 import { cn } from "@/lib/utils";
 
 export type AuthFormViewProps = {
@@ -95,7 +95,7 @@ export function AuthFormView({
         variant="outline"
         className={cn(
           "h-[46px] w-full gap-2.5 text-sm font-semibold",
-          "border-input bg-transparent dark:bg-transparent"
+          "border-input bg-transparent dark:bg-transparent",
         )}
       >
         <span

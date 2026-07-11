@@ -1,7 +1,7 @@
 "use client";
 
-import { AuthFormView } from "@/components/auth/auth-form.view";
-import { useAuthForm, type AuthMode } from "@/hooks/use-auth-form";
+import { AuthFormView } from "@/components/auth/authFormView";
+import { useAuthForm, type AuthMode } from "@/components/auth/useAuthForm";
 import type { Messages } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
