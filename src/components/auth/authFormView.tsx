@@ -4,6 +4,7 @@ import type { UseFormReturn } from "react-hook-form";
 import {
   AppForm,
   FormInput,
+  FormSelect,
   PasswordInput,
   SubmitButton,
 } from "@/components/ui/form";
@@ -11,6 +12,10 @@ import { Button } from "@/components/ui/button";
 import type { Messages } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 import type { AuthFormValues, AuthMode } from "@/components/auth/useAuthForm";
+import {
+  companySizeValues,
+  industryValues,
+} from "@/components/auth/organizationOptions";
 import { cn } from "@/lib/utils";
 
 export type AuthFormViewProps = {
@@ -31,6 +36,16 @@ export function AuthFormView({
   const isSignup = mode === "signup";
   const copy = isSignup ? messages.signup : messages.signin;
   const { fields } = messages;
+  const rootError = form.formState.errors.root?.message;
+
+  const industryOptions = industryValues.map((value) => ({
+    value,
+    label: messages.industries[value],
+  }));
+  const companySizeOptions = companySizeValues.map((value) => ({
+    value,
+    label: messages.companySizes[value],
+  }));
 
   return (
     <div className="relative w-full max-w-[420px] rounded-[16px] border border-border bg-card px-[34px] py-9 shadow-(--shadow-card)">
@@ -54,12 +69,44 @@ export function AuthFormView({
         />
 
         {isSignup && (
-          <FormInput<AuthFormValues>
-            name="company"
-            label={fields.company}
-            autoComplete="organization"
-            placeholder={fields.companyPlaceholder}
-          />
+          <>
+            <FormInput<AuthFormValues>
+              name="fullName"
+              label={fields.fullName}
+              autoComplete="name"
+              placeholder={fields.fullNamePlaceholder}
+            />
+            <FormInput<AuthFormValues>
+              name="company"
+              label={fields.company}
+              autoComplete="organization"
+              placeholder={fields.companyPlaceholder}
+            />
+            <FormSelect<AuthFormValues>
+              name="industry"
+              label={fields.industry}
+              placeholder={fields.industryPlaceholder}
+              options={industryOptions}
+            />
+            <FormSelect<AuthFormValues>
+              name="companySize"
+              label={fields.companySize}
+              placeholder={fields.companySizePlaceholder}
+              options={companySizeOptions}
+            />
+            <FormInput<AuthFormValues>
+              name="region"
+              label={fields.region}
+              autoComplete="country-name"
+              placeholder={fields.regionPlaceholder}
+            />
+            <FormInput<AuthFormValues>
+              name="language"
+              label={fields.language}
+              autoComplete="language"
+              placeholder={fields.languagePlaceholder}
+            />
+          </>
         )}
 
         <PasswordInput<AuthFormValues>
@@ -79,6 +126,15 @@ export function AuthFormView({
             )
           }
         />
+
+        {rootError && (
+          <p
+            role="alert"
+            className="mb-4 rounded-sm border border-ember/40 bg-ember/10 px-3 py-2 text-xs text-ember"
+          >
+            {rootError}
+          </p>
+        )}
 
         <SubmitButton>{copy.cta}</SubmitButton>
       </AppForm>

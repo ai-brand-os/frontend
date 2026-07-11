@@ -12,8 +12,13 @@ export function buildAuthFormValues(
 ): AuthFormValues {
   return {
     email: "founder@acme.dev",
-    company: "Acme Skincare Co.",
     password: "correct-horse-battery-staple",
+    fullName: "Ada Lovelace",
+    company: "Acme Skincare Co.",
+    industry: "SAAS_TECHNOLOGY",
+    companySize: "SIZE_6_20",
+    region: "United States",
+    language: "English",
     ...overrides,
   };
 }

@@ -33,19 +33,62 @@
     "fields": {
       "email": "ایمیل سازمانی",
       "emailPlaceholder": "you@company.com",
+      "fullName": "نام و نام خانوادگی",
+      "fullNamePlaceholder": "آدا لاولیس",
       "company": "شرکت",
       "companyPlaceholder": "شرکت اکمه",
+      "industry": "صنعت",
+      "industryPlaceholder": "یک صنعت را انتخاب کنید",
+      "companySize": "اندازه شرکت",
+      "companySizePlaceholder": "یک اندازه را انتخاب کنید",
+      "region": "منطقه اصلی",
+      "regionPlaceholder": "ایران",
+      "language": "زبان اصلی",
+      "languagePlaceholder": "فارسی",
       "password": "رمز عبور",
       "passwordPlaceholder": "••••••••••"
+    },
+    "industries": {
+      "ECOMMERCE_RETAIL": "تجارت الکترونیک و خرده‌فروشی",
+      "PROFESSIONAL_SERVICES": "خدمات تخصصی",
+      "SAAS_TECHNOLOGY": "نرم‌افزار و فناوری",
+      "HEALTH_WELLNESS": "سلامت و تندرستی",
+      "FOOD_BEVERAGE": "غذا و نوشیدنی",
+      "EDUCATION_COACHING": "آموزش و مربی‌گری",
+      "REAL_ESTATE": "املاک و مستغلات",
+      "FINANCE_INSURANCE": "مالی و بیمه",
+      "MARKETING_CREATIVE_AGENCIES": "بازاریابی و آژانس‌های خلاق",
+      "FASHION_APPAREL": "مد و پوشاک",
+      "BEAUTY_PERSONAL_CARE": "زیبایی و مراقبت شخصی",
+      "HOME_LIFESTYLE": "خانه و سبک زندگی",
+      "TRAVEL_HOSPITALITY": "سفر و مهمان‌نوازی",
+      "NONPROFIT_COMMUNITY": "غیرانتفاعی و اجتماعی",
+      "MANUFACTURING_INDUSTRIAL": "تولید و صنعتی",
+      "OTHER": "سایر"
+    },
+    "companySizes": {
+      "SIZE_1_5": "۱ تا ۵ نفر",
+      "SIZE_6_20": "۶ تا ۲۰ نفر",
+      "SIZE_21_50": "۲۱ تا ۵۰ نفر",
+      "SIZE_50_PLUS": "بیش از ۵۰ نفر"
     },
     "or": "یا",
     "sso": "ادامه با SSO",
     "errors": {
       "emailRequired": "ایمیل سازمانی الزامی است.",
       "emailInvalid": "یک ایمیل معتبر وارد کنید.",
+      "fullNameRequired": "نام و نام خانوادگی الزامی است.",
       "companyRequired": "نام شرکت الزامی است.",
+      "industryRequired": "صنعت خود را انتخاب کنید.",
+      "companySizeRequired": "اندازه شرکت خود را انتخاب کنید.",
+      "regionRequired": "منطقه اصلی الزامی است.",
+      "languageRequired": "زبان اصلی الزامی است.",
       "passwordRequired": "رمز عبور الزامی است.",
-      "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد."
+      "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد.",
+      "invalidCredentials": "ایمیل یا رمز عبور نادرست است.",
+      "emailTaken": "حسابی با این ایمیل از قبل وجود دارد.",
+      "rateLimited": "تلاش‌های بیش از حد. لحظه‌ای بعد دوباره امتحان کنید.",
+      "unexpected": "خطایی رخ داد. دوباره تلاش کنید."
     }
   }
 }

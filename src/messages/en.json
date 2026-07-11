@@ -33,19 +33,62 @@
     "fields": {
       "email": "Work email",
       "emailPlaceholder": "you@company.com",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Ada Lovelace",
       "company": "Company",
       "companyPlaceholder": "Acme Skincare Co.",
+      "industry": "Industry",
+      "industryPlaceholder": "Select an industry",
+      "companySize": "Company size",
+      "companySizePlaceholder": "Select a size",
+      "region": "Primary region",
+      "regionPlaceholder": "United States",
+      "language": "Primary language",
+      "languagePlaceholder": "English",
       "password": "Password",
       "passwordPlaceholder": "••••••••••"
+    },
+    "industries": {
+      "ECOMMERCE_RETAIL": "E-commerce & Retail",
+      "PROFESSIONAL_SERVICES": "Professional Services",
+      "SAAS_TECHNOLOGY": "SaaS & Technology",
+      "HEALTH_WELLNESS": "Health & Wellness",
+      "FOOD_BEVERAGE": "Food & Beverage",
+      "EDUCATION_COACHING": "Education & Coaching",
+      "REAL_ESTATE": "Real Estate",
+      "FINANCE_INSURANCE": "Finance & Insurance",
+      "MARKETING_CREATIVE_AGENCIES": "Marketing & Creative Agencies",
+      "FASHION_APPAREL": "Fashion & Apparel",
+      "BEAUTY_PERSONAL_CARE": "Beauty & Personal Care",
+      "HOME_LIFESTYLE": "Home & Lifestyle",
+      "TRAVEL_HOSPITALITY": "Travel & Hospitality",
+      "NONPROFIT_COMMUNITY": "Nonprofit & Community",
+      "MANUFACTURING_INDUSTRIAL": "Manufacturing & Industrial",
+      "OTHER": "Other"
+    },
+    "companySizes": {
+      "SIZE_1_5": "1–5 people",
+      "SIZE_6_20": "6–20 people",
+      "SIZE_21_50": "21–50 people",
+      "SIZE_50_PLUS": "50+ people"
     },
     "or": "or",
     "sso": "Continue with SSO",
     "errors": {
       "emailRequired": "Work email is required.",
       "emailInvalid": "Enter a valid email address.",
+      "fullNameRequired": "Full name is required.",
       "companyRequired": "Company is required.",
+      "industryRequired": "Select your industry.",
+      "companySizeRequired": "Select your company size.",
+      "regionRequired": "Primary region is required.",
+      "languageRequired": "Primary language is required.",
       "passwordRequired": "Password is required.",
-      "passwordMin": "Password must be at least 8 characters."
+      "passwordMin": "Password must be at least 8 characters.",
+      "invalidCredentials": "Invalid email or password.",
+      "emailTaken": "An account with this email already exists.",
+      "rateLimited": "Too many attempts. Try again in a moment.",
+      "unexpected": "Something went wrong. Please try again."
     }
   }
 }

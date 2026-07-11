@@ -5,6 +5,7 @@ import { cleanup } from "@testing-library/react";
 import { server } from "@/test/server";
 import "@/test/mocks/next-navigation";
 import { mockMatchMedia, mockResizeObserver } from "@/test/utils/observers";
+import { clearTokens } from "@/lib/api";
 
 beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 
@@ -20,6 +21,7 @@ afterEach(() => {
   cleanup();
   server.resetHandlers();
   vi.unstubAllGlobals();
+  clearTokens();
 });
 
 afterAll(() => server.close());

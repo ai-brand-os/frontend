@@ -11,6 +11,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     css: true,
+    clearMocks: true,
     restoreMocks: true,
     exclude: ["node_modules", ".next", "e2e"],
     coverage: {
