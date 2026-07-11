@@ -10,5 +10,42 @@
     "primaryAction": "Deploy Now",
     "secondaryAction": "Documentation",
     "languageLabel": "Language"
+  },
+  "auth": {
+    "brandName": "AI Brand OS",
+    "signin": {
+      "kicker": "Welcome back",
+      "title": "Sign in to Brand OS",
+      "subtitle": "Pick up where your brand left off.",
+      "cta": "Sign in",
+      "switchText": "New to Brand OS?",
+      "switchCta": "Create one",
+      "forgot": "Forgot?"
+    },
+    "signup": {
+      "kicker": "Get started",
+      "title": "Create your workspace",
+      "subtitle": "Spin up a brand from your docs in minutes.",
+      "cta": "Create workspace",
+      "switchText": "Already have a workspace?",
+      "switchCta": "Sign in"
+    },
+    "fields": {
+      "email": "Work email",
+      "emailPlaceholder": "you@company.com",
+      "company": "Company",
+      "companyPlaceholder": "Acme Skincare Co.",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••••"
+    },
+    "or": "or",
+    "sso": "Continue with SSO",
+    "errors": {
+      "emailRequired": "Work email is required.",
+      "emailInvalid": "Enter a valid email address.",
+      "companyRequired": "Company is required.",
+      "passwordRequired": "Password is required.",
+      "passwordMin": "Password must be at least 8 characters."
+    }
   }
 }

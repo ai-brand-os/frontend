@@ -10,5 +10,42 @@
     "primaryAction": "استقرار",
     "secondaryAction": "مستندات",
     "languageLabel": "زبان"
+  },
+  "auth": {
+    "brandName": "AI Brand OS",
+    "signin": {
+      "kicker": "خوش برگشتید",
+      "title": "ورود به Brand OS",
+      "subtitle": "از همان‌جا که برندتان را رها کردید ادامه دهید.",
+      "cta": "ورود",
+      "switchText": "تازه با Brand OS آشنا شده‌اید؟",
+      "switchCta": "حساب بسازید",
+      "forgot": "فراموشی رمز؟"
+    },
+    "signup": {
+      "kicker": "شروع کنید",
+      "title": "فضای کاری خود را بسازید",
+      "subtitle": "در چند دقیقه از روی اسناد خود یک برند بسازید.",
+      "cta": "ساخت فضای کاری",
+      "switchText": "از قبل فضای کاری دارید؟",
+      "switchCta": "ورود"
+    },
+    "fields": {
+      "email": "ایمیل سازمانی",
+      "emailPlaceholder": "you@company.com",
+      "company": "شرکت",
+      "companyPlaceholder": "شرکت اکمه",
+      "password": "رمز عبور",
+      "passwordPlaceholder": "••••••••••"
+    },
+    "or": "یا",
+    "sso": "ادامه با SSO",
+    "errors": {
+      "emailRequired": "ایمیل سازمانی الزامی است.",
+      "emailInvalid": "یک ایمیل معتبر وارد کنید.",
+      "companyRequired": "نام شرکت الزامی است.",
+      "passwordRequired": "رمز عبور الزامی است.",
+      "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد."
+    }
   }
 }
