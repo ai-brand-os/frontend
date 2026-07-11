@@ -12,7 +12,11 @@ type AuthFormProps = {
 };
 
 export function AuthForm({ mode, locale, messages }: AuthFormProps) {
-  const { form, onSubmit } = useAuthForm({ mode, locale, messages });
+  const { form, onSubmit, step, stepCount, goNext, goBack } = useAuthForm({
+    mode,
+    locale,
+    messages,
+  });
 
   return (
     <AuthFormView
@@ -21,6 +25,10 @@ export function AuthForm({ mode, locale, messages }: AuthFormProps) {
       messages={messages}
       form={form}
       onSubmit={onSubmit}
+      step={step}
+      stepCount={stepCount}
+      goNext={goNext}
+      goBack={goBack}
     />
   );
 }

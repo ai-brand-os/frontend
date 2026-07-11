@@ -28,7 +28,22 @@
       "subtitle": "Spin up a brand from your docs in minutes.",
       "cta": "Create workspace",
       "switchText": "Already have a workspace?",
-      "switchCta": "Sign in"
+      "switchCta": "Sign in",
+      "next": "Continue",
+      "back": "Back",
+      "stepIndicator": "Step {current} of {total}",
+      "steps": {
+        "account": {
+          "label": "Your account",
+          "title": "Create your workspace",
+          "subtitle": "Start with your account details."
+        },
+        "organization": {
+          "label": "Your organization",
+          "title": "Tell us about your company",
+          "subtitle": "This shapes your brand from day one."
+        }
+      }
     },
     "fields": {
       "email": "Work email",

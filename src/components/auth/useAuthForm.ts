@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +15,19 @@ import type { Messages } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
 export type AuthMode = "signin" | "signup";
+
+/** Fields collected on the first signup wizard step (user account). */
+export const accountFields = ["email", "fullName", "password"] as const;
+/** Fields collected on the second signup wizard step (organization). */
+export const organizationFields = [
+  "company",
+  "industry",
+  "companySize",
+  "region",
+  "language",
+] as const;
+
+export const signupStepCount = 2;
 
 export type AuthFormValues = {
   email: string;
@@ -37,6 +50,7 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
   const router = useRouter();
   const isSignup = mode === "signup";
   const { errors: errorMessages } = messages;
+  const [step, setStep] = useState(0);
 
   const schema = useMemo<yup.ObjectSchema<AuthFormValues>>(() => {
     const optionalString = yup.string().optional();
@@ -90,6 +104,13 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
     },
   });
 
+  const goNext = useCallback(async () => {
+    const valid = await form.trigger([...accountFields]);
+    if (valid) setStep(1);
+  }, [form]);
+
+  const goBack = useCallback(() => setStep(0), []);
+
   const onSubmit = form.handleSubmit(async (values) => {
     try {
       if (isSignup) {
@@ -114,7 +135,14 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
     }
   });
 
-  return { form, onSubmit };
+  return {
+    form,
+    onSubmit,
+    step,
+    stepCount: signupStepCount,
+    goNext,
+    goBack,
+  };
 }
 
 /** Maps a backend error `code` to localized copy, falling back to generic. */
