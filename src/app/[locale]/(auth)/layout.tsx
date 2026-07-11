@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/dictionaries";
 import { notFound } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type AuthLayoutProps = Readonly<{
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export default async function AuthLayout({
             {messages.auth.brandName}
           </span>
         </Link>
+        <ThemeToggle />
       </header>
 
       <main className="relative flex flex-1 items-center justify-center overflow-hidden p-6">
