@@ -18,7 +18,7 @@ export function buildAuthFormValues(
     industry: "SAAS_TECHNOLOGY",
     companySize: "SIZE_6_20",
     region: "United States",
-    language: "English",
+    language: "en",
     ...overrides,
   };
 }

@@ -87,6 +87,12 @@
       "SIZE_21_50": "21–50 people",
       "SIZE_50_PLUS": "50+ people"
     },
+    "languages": {
+      "en": "English",
+      "fa": "Persian",
+      "ar": "Arabic",
+      "tr": "Turkish"
+    },
     "or": "or",
     "sso": "Continue with SSO",
     "errors": {

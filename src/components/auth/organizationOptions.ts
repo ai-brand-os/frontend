@@ -30,5 +30,8 @@ export const companySizeValues = [
   "SIZE_50_PLUS",
 ] as const;
 
+export const languageValues = ["en", "fa", "ar", "tr"] as const;
+
 export type IndustryValue = (typeof industryValues)[number];
 export type CompanySizeValue = (typeof companySizeValues)[number];
+export type LanguageValue = (typeof languageValues)[number];

@@ -15,6 +15,7 @@ import type { AuthFormValues, AuthMode } from "@/components/auth/useAuthForm";
 import {
   companySizeValues,
   industryValues,
+  languageValues,
 } from "@/components/auth/organizationOptions";
 import { cn } from "@/lib/utils";
 
@@ -52,6 +53,10 @@ export function AuthFormView({
   const companySizeOptions = companySizeValues.map((value) => ({
     value,
     label: messages.companySizes[value],
+  }));
+  const languageOptions = languageValues.map((value) => ({
+    value,
+    label: messages.languages[value],
   }));
 
   // Signup is a two-step wizard: account details, then organization.
@@ -156,11 +161,11 @@ export function AuthFormView({
               autoComplete="country-name"
               placeholder={fields.regionPlaceholder}
             />
-            <FormInput<AuthFormValues>
+            <FormSelect<AuthFormValues>
               name="language"
               label={fields.language}
-              autoComplete="language"
               placeholder={fields.languagePlaceholder}
+              options={languageOptions}
               wrapperClassName="mb-6 space-y-1.5"
             />
           </>

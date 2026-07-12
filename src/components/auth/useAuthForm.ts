@@ -9,6 +9,7 @@ import * as yup from "yup";
 import {
   companySizeValues,
   industryValues,
+  languageValues,
 } from "@/components/auth/organizationOptions";
 import { ApiError, login, signup } from "@/lib/api";
 import type { Messages } from "@/i18n/dictionaries";
@@ -85,7 +86,10 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
         ? yup.string().required(errorMessages.regionRequired)
         : optionalString,
       language: isSignup
-        ? yup.string().required(errorMessages.languageRequired)
+        ? yup
+            .string()
+            .required(errorMessages.languageRequired)
+            .oneOf(languageValues, errorMessages.languageRequired)
         : optionalString,
     });
   }, [isSignup, errorMessages]);
