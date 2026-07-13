@@ -11,6 +11,66 @@
     "secondaryAction": "مستندات",
     "languageLabel": "زبان"
   },
+  "nav": {
+    "brand": "AI Brand OS",
+    "sectionMain": "فضای کاری",
+    "sectionManage": "مدیریت",
+    "dashboard": "داشبورد",
+    "products": "محصولات",
+    "organization": "سازمان",
+    "insights": "بینش‌ها",
+    "settings": "تنظیمات",
+    "searchPlaceholder": "جستجوی محصولات، کارها…",
+    "newBrand": "برند جدید",
+    "toggleTheme": "تغییر پوسته",
+    "signOut": "خروج",
+    "userName": "جوردن دیاز",
+    "userRole": "مالک"
+  },
+  "dashboard": {
+    "kicker": "فضای کاری",
+    "title": "عصر بخیر، {name}",
+    "subtitle": "امروز موتور برند شما این‌ها را تحویل داد.",
+    "newProduct": "محصول جدید",
+    "stats": {
+      "products": "محصولات فعال",
+      "completeness": "میانگین تکمیل",
+      "jobs": "کارهای در حال اجرا",
+      "sources": "منابع نگاشت‌شده"
+    },
+    "trendUp": "{value} بیشتر این هفته",
+    "trendDown": "{value} کمتر این هفته",
+    "completenessTitle": "تکمیل برند",
+    "completenessHint": "عنصر شاخص",
+    "completenessCaption": "{resolved} از {total} ویژگی برند تعیین شد.",
+    "list": {
+      "title": "محصولات اخیر",
+      "subtitle": "آخرین برندسازی‌ها در سراسر فضای کاری.",
+      "viewAll": "مشاهده همه",
+      "empty": "هنوز محصولی نیست.",
+      "columns": {
+        "product": "محصول",
+        "status": "وضعیت",
+        "completeness": "تکمیل",
+        "updated": "به‌روزرسانی"
+      }
+    },
+    "status": {
+      "approved": "تأیید خودکار",
+      "processing": "در حال پردازش",
+      "failed": "ناموفق",
+      "queued": "در صف",
+      "draft": "پیش‌نویس"
+    },
+    "updatedAgo": "{value} پیش"
+  },
+  "organization": {
+    "kicker": "مدیریت",
+    "title": "سازمان",
+    "subtitle": "اعضا، فضای کاری و پیش‌فرض‌های برند.",
+    "members": "اعضا",
+    "invite": "دعوت عضو"
+  },
   "auth": {
     "brandName": "AI Brand OS",
     "signin": {

@@ -11,6 +11,66 @@
     "secondaryAction": "Documentation",
     "languageLabel": "Language"
   },
+  "nav": {
+    "brand": "AI Brand OS",
+    "sectionMain": "Workspace",
+    "sectionManage": "Manage",
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "organization": "Organization",
+    "insights": "Insights",
+    "settings": "Settings",
+    "searchPlaceholder": "Search products, jobs…",
+    "newBrand": "New brand",
+    "toggleTheme": "Toggle theme",
+    "signOut": "Sign out",
+    "userName": "Jordan Diaz",
+    "userRole": "Owner"
+  },
+  "dashboard": {
+    "kicker": "Workspace",
+    "title": "Good afternoon, {name}",
+    "subtitle": "Here is what your brand engine shipped today.",
+    "newProduct": "New product",
+    "stats": {
+      "products": "Active products",
+      "completeness": "Avg. completeness",
+      "jobs": "Jobs running",
+      "sources": "Sources mapped"
+    },
+    "trendUp": "up {value} this week",
+    "trendDown": "down {value} this week",
+    "completenessTitle": "Brand completeness",
+    "completenessHint": "signature element",
+    "completenessCaption": "{resolved} of {total} brand attributes resolved.",
+    "list": {
+      "title": "Recent products",
+      "subtitle": "Latest brand generations across the workspace.",
+      "viewAll": "View all",
+      "empty": "No products yet.",
+      "columns": {
+        "product": "Product",
+        "status": "Status",
+        "completeness": "Completeness",
+        "updated": "Updated"
+      }
+    },
+    "status": {
+      "approved": "Auto-Approved",
+      "processing": "Processing",
+      "failed": "Failed",
+      "queued": "Queued",
+      "draft": "Draft"
+    },
+    "updatedAgo": "{value} ago"
+  },
+  "organization": {
+    "kicker": "Manage",
+    "title": "Organization",
+    "subtitle": "Members, workspace and brand defaults.",
+    "members": "Members",
+    "invite": "Invite member"
+  },
   "auth": {
     "brandName": "AI Brand OS",
     "signin": {
