@@ -33,17 +33,62 @@ describe("AuthForm", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the company field only in signup mode", () => {
+  it("starts signup on the account step and hides organization fields", () => {
     renderAuthForm("signup");
 
     expect(
-      screen.getByLabelText(authMessagesFixture.fields.company),
+      screen.getByLabelText(authMessagesFixture.fields.email),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("heading", {
-        name: authMessagesFixture.signup.title,
-      }),
+      screen.getByLabelText(authMessagesFixture.fields.fullName),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(authMessagesFixture.fields.company),
+    ).not.toBeInTheDocument();
+  });
+
+  it("advances to the organization step after valid account input", async () => {
+    const user = userEvent.setup();
+    renderAuthForm("signup");
+
+    await user.type(
+      screen.getByLabelText(authMessagesFixture.fields.email),
+      "founder@acme.dev",
+    );
+    await user.type(
+      screen.getByLabelText(authMessagesFixture.fields.fullName),
+      "Ada Lovelace",
+    );
+    await user.type(
+      screen.getByLabelText(authMessagesFixture.fields.password),
+      "correct-horse-battery-staple",
+    );
+    await user.click(
+      screen.getByRole("button", { name: authMessagesFixture.signup.next }),
+    );
+
+    expect(
+      await screen.findByLabelText(authMessagesFixture.fields.company),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(authMessagesFixture.fields.email),
+    ).not.toBeInTheDocument();
+  });
+
+  it("blocks the account step until required fields are valid", async () => {
+    const user = userEvent.setup();
+    renderAuthForm("signup");
+
+    await user.click(
+      screen.getByRole("button", { name: authMessagesFixture.signup.next }),
+    );
+
+    expect(
+      await screen.findByText(authMessagesFixture.errors.emailRequired),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(authMessagesFixture.fields.company),
+    ).not.toBeInTheDocument();
   });
 
   it("shows validation errors and blocks navigation when submitted empty", async () => {

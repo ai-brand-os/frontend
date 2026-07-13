@@ -1,7 +1,10 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { HttpResponse, http } from "msw";
 
 import { useAuthForm } from "@/components/auth/useAuthForm";
+import { getApiBaseUrl } from "@/lib/api";
+import { server } from "@/test/server";
 import { authMessagesFixture } from "@/test/fixtures/messages.fixture";
 import { buildAuthFormValues } from "@/test/factories/auth-form-values.factory";
 import { router } from "@/test/utils/router";
@@ -25,8 +28,13 @@ describe("useAuthForm", () => {
 
     expect(result.current.form.getValues()).toEqual({
       email: "",
-      company: "",
       password: "",
+      fullName: "",
+      company: "",
+      industry: "",
+      companySize: "",
+      region: "",
+      language: "",
     });
     expect(result.current.form.formState.errors).toEqual({});
   });
@@ -116,11 +124,42 @@ describe("useAuthForm", () => {
 
     act(() => {
       result.current.form.setValue("email", values.email);
-      result.current.form.setValue("company", values.company);
       result.current.form.setValue("password", values.password);
+      result.current.form.setValue("fullName", values.fullName!);
+      result.current.form.setValue("company", values.company!);
+      result.current.form.setValue("industry", values.industry!);
+      result.current.form.setValue("companySize", values.companySize!);
+      result.current.form.setValue("region", values.region!);
+      result.current.form.setValue("language", values.language!);
     });
     await act(() => result.current.onSubmit());
 
     await waitFor(() => expect(router.push).toHaveBeenCalledWith("/en"));
+  });
+
+  it("surfaces a root error when the API rejects the credentials", async () => {
+    server.use(
+      http.post(`${getApiBaseUrl()}/auth/login`, () =>
+        HttpResponse.json(
+          { success: false, error: { code: "INVALID_CREDENTIALS", message: "nope" } },
+          { status: 401 },
+        ),
+      ),
+    );
+    const { result } = setup("signin");
+    const values = buildAuthFormValues();
+
+    act(() => {
+      result.current.form.setValue("email", values.email);
+      result.current.form.setValue("password", values.password);
+    });
+    await act(() => result.current.onSubmit());
+
+    await waitFor(() =>
+      expect(result.current.form.formState.errors.root?.message).toBe(
+        authMessagesFixture.errors.invalidCredentials,
+      ),
+    );
+    expect(router.push).not.toHaveBeenCalled();
   });
 });

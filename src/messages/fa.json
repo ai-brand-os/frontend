@@ -11,6 +11,66 @@
     "secondaryAction": "مستندات",
     "languageLabel": "زبان"
   },
+  "nav": {
+    "brand": "AI Brand OS",
+    "sectionMain": "فضای کاری",
+    "sectionManage": "مدیریت",
+    "dashboard": "داشبورد",
+    "products": "محصولات",
+    "organization": "سازمان",
+    "insights": "بینش‌ها",
+    "settings": "تنظیمات",
+    "searchPlaceholder": "جستجوی محصولات، کارها…",
+    "newBrand": "برند جدید",
+    "toggleTheme": "تغییر پوسته",
+    "signOut": "خروج",
+    "userName": "جوردن دیاز",
+    "userRole": "مالک"
+  },
+  "dashboard": {
+    "kicker": "فضای کاری",
+    "title": "عصر بخیر، {name}",
+    "subtitle": "امروز موتور برند شما این‌ها را تحویل داد.",
+    "newProduct": "محصول جدید",
+    "stats": {
+      "products": "محصولات فعال",
+      "completeness": "میانگین تکمیل",
+      "jobs": "کارهای در حال اجرا",
+      "sources": "منابع نگاشت‌شده"
+    },
+    "trendUp": "{value} بیشتر این هفته",
+    "trendDown": "{value} کمتر این هفته",
+    "completenessTitle": "تکمیل برند",
+    "completenessHint": "عنصر شاخص",
+    "completenessCaption": "{resolved} از {total} ویژگی برند تعیین شد.",
+    "list": {
+      "title": "محصولات اخیر",
+      "subtitle": "آخرین برندسازی‌ها در سراسر فضای کاری.",
+      "viewAll": "مشاهده همه",
+      "empty": "هنوز محصولی نیست.",
+      "columns": {
+        "product": "محصول",
+        "status": "وضعیت",
+        "completeness": "تکمیل",
+        "updated": "به‌روزرسانی"
+      }
+    },
+    "status": {
+      "approved": "تأیید خودکار",
+      "processing": "در حال پردازش",
+      "failed": "ناموفق",
+      "queued": "در صف",
+      "draft": "پیش‌نویس"
+    },
+    "updatedAgo": "{value} پیش"
+  },
+  "organization": {
+    "kicker": "مدیریت",
+    "title": "سازمان",
+    "subtitle": "اعضا، فضای کاری و پیش‌فرض‌های برند.",
+    "members": "اعضا",
+    "invite": "دعوت عضو"
+  },
   "auth": {
     "brandName": "AI Brand OS",
     "signin": {
@@ -28,24 +88,88 @@
       "subtitle": "در چند دقیقه از روی اسناد خود یک برند بسازید.",
       "cta": "ساخت فضای کاری",
       "switchText": "از قبل فضای کاری دارید؟",
-      "switchCta": "ورود"
+      "switchCta": "ورود",
+      "next": "ادامه",
+      "back": "بازگشت",
+      "stepIndicator": "مرحله {current} از {total}",
+      "steps": {
+        "account": {
+          "label": "حساب شما",
+          "title": "فضای کاری خود را بسازید",
+          "subtitle": "با اطلاعات حساب خود شروع کنید."
+        },
+        "organization": {
+          "label": "سازمان شما",
+          "title": "درباره شرکت خود بگویید",
+          "subtitle": "این از روز اول به برند شما شکل می‌دهد."
+        }
+      }
     },
     "fields": {
       "email": "ایمیل سازمانی",
       "emailPlaceholder": "you@company.com",
+      "fullName": "نام و نام خانوادگی",
+      "fullNamePlaceholder": "آدا لاولیس",
       "company": "شرکت",
       "companyPlaceholder": "شرکت اکمه",
+      "industry": "صنعت",
+      "industryPlaceholder": "یک صنعت را انتخاب کنید",
+      "companySize": "اندازه شرکت",
+      "companySizePlaceholder": "یک اندازه را انتخاب کنید",
+      "region": "منطقه اصلی",
+      "regionPlaceholder": "ایران",
+      "language": "زبان اصلی",
+      "languagePlaceholder": "فارسی",
       "password": "رمز عبور",
       "passwordPlaceholder": "••••••••••"
+    },
+    "industries": {
+      "ECOMMERCE_RETAIL": "تجارت الکترونیک و خرده‌فروشی",
+      "PROFESSIONAL_SERVICES": "خدمات تخصصی",
+      "SAAS_TECHNOLOGY": "نرم‌افزار و فناوری",
+      "HEALTH_WELLNESS": "سلامت و تندرستی",
+      "FOOD_BEVERAGE": "غذا و نوشیدنی",
+      "EDUCATION_COACHING": "آموزش و مربی‌گری",
+      "REAL_ESTATE": "املاک و مستغلات",
+      "FINANCE_INSURANCE": "مالی و بیمه",
+      "MARKETING_CREATIVE_AGENCIES": "بازاریابی و آژانس‌های خلاق",
+      "FASHION_APPAREL": "مد و پوشاک",
+      "BEAUTY_PERSONAL_CARE": "زیبایی و مراقبت شخصی",
+      "HOME_LIFESTYLE": "خانه و سبک زندگی",
+      "TRAVEL_HOSPITALITY": "سفر و مهمان‌نوازی",
+      "NONPROFIT_COMMUNITY": "غیرانتفاعی و اجتماعی",
+      "MANUFACTURING_INDUSTRIAL": "تولید و صنعتی",
+      "OTHER": "سایر"
+    },
+    "companySizes": {
+      "SIZE_1_5": "۱ تا ۵ نفر",
+      "SIZE_6_20": "۶ تا ۲۰ نفر",
+      "SIZE_21_50": "۲۱ تا ۵۰ نفر",
+      "SIZE_50_PLUS": "بیش از ۵۰ نفر"
+    },
+    "languages": {
+      "en": "انگلیسی",
+      "fa": "فارسی",
+      "ar": "عربی",
+      "tr": "ترکی"
     },
     "or": "یا",
     "sso": "ادامه با SSO",
     "errors": {
       "emailRequired": "ایمیل سازمانی الزامی است.",
       "emailInvalid": "یک ایمیل معتبر وارد کنید.",
+      "fullNameRequired": "نام و نام خانوادگی الزامی است.",
       "companyRequired": "نام شرکت الزامی است.",
+      "industryRequired": "صنعت خود را انتخاب کنید.",
+      "companySizeRequired": "اندازه شرکت خود را انتخاب کنید.",
+      "regionRequired": "منطقه اصلی الزامی است.",
+      "languageRequired": "زبان اصلی الزامی است.",
       "passwordRequired": "رمز عبور الزامی است.",
-      "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد."
+      "passwordMin": "رمز عبور باید حداقل ۸ کاراکتر باشد.",
+      "invalidCredentials": "ایمیل یا رمز عبور نادرست است.",
+      "emailTaken": "حسابی با این ایمیل از قبل وجود دارد.",
+      "rateLimited": "تلاش‌های بیش از حد. لحظه‌ای بعد دوباره امتحان کنید.",
+      "unexpected": "خطایی رخ داد. دوباره تلاش کنید."
     }
   }
 }

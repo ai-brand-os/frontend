@@ -11,6 +11,66 @@
     "secondaryAction": "Documentation",
     "languageLabel": "Language"
   },
+  "nav": {
+    "brand": "AI Brand OS",
+    "sectionMain": "Workspace",
+    "sectionManage": "Manage",
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "organization": "Organization",
+    "insights": "Insights",
+    "settings": "Settings",
+    "searchPlaceholder": "Search products, jobs…",
+    "newBrand": "New brand",
+    "toggleTheme": "Toggle theme",
+    "signOut": "Sign out",
+    "userName": "Jordan Diaz",
+    "userRole": "Owner"
+  },
+  "dashboard": {
+    "kicker": "Workspace",
+    "title": "Good afternoon, {name}",
+    "subtitle": "Here is what your brand engine shipped today.",
+    "newProduct": "New product",
+    "stats": {
+      "products": "Active products",
+      "completeness": "Avg. completeness",
+      "jobs": "Jobs running",
+      "sources": "Sources mapped"
+    },
+    "trendUp": "up {value} this week",
+    "trendDown": "down {value} this week",
+    "completenessTitle": "Brand completeness",
+    "completenessHint": "signature element",
+    "completenessCaption": "{resolved} of {total} brand attributes resolved.",
+    "list": {
+      "title": "Recent products",
+      "subtitle": "Latest brand generations across the workspace.",
+      "viewAll": "View all",
+      "empty": "No products yet.",
+      "columns": {
+        "product": "Product",
+        "status": "Status",
+        "completeness": "Completeness",
+        "updated": "Updated"
+      }
+    },
+    "status": {
+      "approved": "Auto-Approved",
+      "processing": "Processing",
+      "failed": "Failed",
+      "queued": "Queued",
+      "draft": "Draft"
+    },
+    "updatedAgo": "{value} ago"
+  },
+  "organization": {
+    "kicker": "Manage",
+    "title": "Organization",
+    "subtitle": "Members, workspace and brand defaults.",
+    "members": "Members",
+    "invite": "Invite member"
+  },
   "auth": {
     "brandName": "AI Brand OS",
     "signin": {
@@ -28,24 +88,88 @@
       "subtitle": "Spin up a brand from your docs in minutes.",
       "cta": "Create workspace",
       "switchText": "Already have a workspace?",
-      "switchCta": "Sign in"
+      "switchCta": "Sign in",
+      "next": "Continue",
+      "back": "Back",
+      "stepIndicator": "Step {current} of {total}",
+      "steps": {
+        "account": {
+          "label": "Your account",
+          "title": "Create your workspace",
+          "subtitle": "Start with your account details."
+        },
+        "organization": {
+          "label": "Your organization",
+          "title": "Tell us about your company",
+          "subtitle": "This shapes your brand from day one."
+        }
+      }
     },
     "fields": {
       "email": "Work email",
       "emailPlaceholder": "you@company.com",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Ada Lovelace",
       "company": "Company",
       "companyPlaceholder": "Acme Skincare Co.",
+      "industry": "Industry",
+      "industryPlaceholder": "Select an industry",
+      "companySize": "Company size",
+      "companySizePlaceholder": "Select a size",
+      "region": "Primary region",
+      "regionPlaceholder": "United States",
+      "language": "Primary language",
+      "languagePlaceholder": "English",
       "password": "Password",
       "passwordPlaceholder": "••••••••••"
+    },
+    "industries": {
+      "ECOMMERCE_RETAIL": "E-commerce & Retail",
+      "PROFESSIONAL_SERVICES": "Professional Services",
+      "SAAS_TECHNOLOGY": "SaaS & Technology",
+      "HEALTH_WELLNESS": "Health & Wellness",
+      "FOOD_BEVERAGE": "Food & Beverage",
+      "EDUCATION_COACHING": "Education & Coaching",
+      "REAL_ESTATE": "Real Estate",
+      "FINANCE_INSURANCE": "Finance & Insurance",
+      "MARKETING_CREATIVE_AGENCIES": "Marketing & Creative Agencies",
+      "FASHION_APPAREL": "Fashion & Apparel",
+      "BEAUTY_PERSONAL_CARE": "Beauty & Personal Care",
+      "HOME_LIFESTYLE": "Home & Lifestyle",
+      "TRAVEL_HOSPITALITY": "Travel & Hospitality",
+      "NONPROFIT_COMMUNITY": "Nonprofit & Community",
+      "MANUFACTURING_INDUSTRIAL": "Manufacturing & Industrial",
+      "OTHER": "Other"
+    },
+    "companySizes": {
+      "SIZE_1_5": "1–5 people",
+      "SIZE_6_20": "6–20 people",
+      "SIZE_21_50": "21–50 people",
+      "SIZE_50_PLUS": "50+ people"
+    },
+    "languages": {
+      "en": "English",
+      "fa": "Persian",
+      "ar": "Arabic",
+      "tr": "Turkish"
     },
     "or": "or",
     "sso": "Continue with SSO",
     "errors": {
       "emailRequired": "Work email is required.",
       "emailInvalid": "Enter a valid email address.",
+      "fullNameRequired": "Full name is required.",
       "companyRequired": "Company is required.",
+      "industryRequired": "Select your industry.",
+      "companySizeRequired": "Select your company size.",
+      "regionRequired": "Primary region is required.",
+      "languageRequired": "Primary language is required.",
       "passwordRequired": "Password is required.",
-      "passwordMin": "Password must be at least 8 characters."
+      "passwordMin": "Password must be at least 8 characters.",
+      "invalidCredentials": "Invalid email or password.",
+      "emailTaken": "An account with this email already exists.",
+      "rateLimited": "Too many attempts. Try again in a moment.",
+      "unexpected": "Something went wrong. Please try again."
     }
   }
 }
