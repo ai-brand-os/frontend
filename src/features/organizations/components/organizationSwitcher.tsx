@@ -22,7 +22,7 @@ type OrganizationSwitcherProps = {
 /** Swaps the `[orgId]` segment of a dashboard path for another org's id. */
 function withOrgId(pathname: string, orgId: string): string {
   const segments = pathname.split("/");
-  segments[2] = orgId;
+  segments[3] = orgId;
   return segments.join("/");
 }
 
@@ -147,7 +147,9 @@ export function OrganizationSwitcher({
                 return (
                   <Menu.Item
                     key={organization.id}
-                    render={<Link href={withOrgId(pathname, organization.id)} />}
+                    render={
+                      <Link href={withOrgId(pathname, organization.id)} />
+                    }
                     className={cn(
                       "flex h-10 cursor-pointer items-center gap-2.5 rounded-md px-2 no-underline outline-none",
                       active
