@@ -2,8 +2,9 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { HttpResponse, http } from "msw";
 
-import { useAuthForm } from "@/components/auth/useAuthForm";
+import { useAuthForm } from "@/features/auth/hooks/useAuthForm";
 import { getApiBaseUrl } from "@/lib/api";
+import { createWrapper } from "@/test/render";
 import { server } from "@/test/server";
 import { authMessagesFixture } from "@/test/fixtures/messages.fixture";
 import { buildAuthFormValues } from "@/test/factories/auth-form-values.factory";
@@ -15,11 +16,14 @@ function setup(mode: "signin" | "signup" = "signin") {
   // the real app that read happens inside AppForm/FormInput. Reading
   // `.errors` here mirrors that subscription so this hook-only test sees
   // the same updates a mounted form would.
-  return renderHook(() => {
-    const result = useAuthForm({ mode, locale: "en", messages: authMessagesFixture });
-    void result.form.formState.errors;
-    return result;
-  });
+  return renderHook(
+    () => {
+      const result = useAuthForm({ mode, locale: "en", messages: authMessagesFixture });
+      void result.form.formState.errors;
+      return result;
+    },
+    { wrapper: createWrapper() },
+  );
 }
 
 describe("useAuthForm", () => {

@@ -1,4 +1,4 @@
-import type { AuthFormValues } from "@/components/auth/useAuthForm";
+import type { AuthFormValues } from "@/features/auth/schemas/authForm.schema";
 
 /**
  * Factory for form input, distinct from the `messages.fixture` above:

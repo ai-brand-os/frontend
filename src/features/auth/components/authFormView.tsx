@@ -11,12 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import type { Messages } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import type { AuthFormValues, AuthMode } from "@/components/auth/useAuthForm";
+import type { AuthFormValues, AuthMode } from "../schemas/authForm.schema";
 import {
   companySizeValues,
   industryValues,
   languageValues,
-} from "@/components/auth/organizationOptions";
+} from "../utils/organizationOptions";
 import { cn } from "@/lib/utils";
 
 export type AuthFormViewProps = {
