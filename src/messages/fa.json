@@ -67,9 +67,59 @@
   "organization": {
     "kicker": "مدیریت",
     "title": "سازمان",
-    "subtitle": "اعضا، فضای کاری و پیش‌فرض‌های برند.",
-    "members": "اعضا",
-    "invite": "دعوت عضو"
+    "subtitle": "فضاهای کاری شما و پیش‌فرض‌های برند آن‌ها.",
+    "add": "افزودن سازمان",
+    "form": {
+      "createTitle": "افزودن سازمان",
+      "createSubtitle": "یک فضای کاری تازه بسازید. مالک آن شما خواهید بود.",
+      "editTitle": "ویرایش سازمان",
+      "editSubtitle": "پیش‌فرض‌های برند این فضای کاری را به‌روز کنید.",
+      "edit": "ویرایش",
+      "cancel": "انصراف",
+      "submitCreate": "ساخت سازمان",
+      "submitEdit": "ذخیره تغییرات",
+      "fields": {
+        "name": "نام سازمان",
+        "namePlaceholder": "مثلاً آکمی",
+        "industry": "صنعت",
+        "industryPlaceholder": "یک صنعت انتخاب کنید",
+        "companySize": "اندازه شرکت",
+        "companySizePlaceholder": "یک اندازه انتخاب کنید",
+        "websiteUrl": "وب‌سایت",
+        "websiteUrlPlaceholder": "https://acme.co",
+        "primaryRegion": "منطقه اصلی",
+        "primaryRegionPlaceholder": "ایران",
+        "primaryLanguage": "زبان اصلی",
+        "primaryLanguagePlaceholder": "یک زبان انتخاب کنید"
+      },
+      "errors": {
+        "nameRequired": "نام سازمان الزامی است.",
+        "industryRequired": "یک صنعت انتخاب کنید.",
+        "companySizeRequired": "اندازه شرکت را انتخاب کنید.",
+        "websiteUrlInvalid": "یک نشانی معتبر همراه با https:// وارد کنید.",
+        "primaryRegionRequired": "منطقه اصلی الزامی است.",
+        "primaryLanguageRequired": "زبان اصلی را انتخاب کنید."
+      }
+    },
+    "list": {
+      "title": "سازمان‌ها",
+      "subtitle": "همه فضاهای کاری که عضو آن هستید.",
+      "empty": "هنوز عضو هیچ سازمانی نیستید.",
+      "loading": "در حال بارگذاری سازمان‌ها…",
+      "retry": "تلاش دوباره"
+    },
+    "roles": {
+      "OWNER": "مالک",
+      "ADMIN": "مدیر",
+      "EDITOR": "ویرایشگر",
+      "VIEWER": "بیننده"
+    },
+    "errors": {
+      "unauthorized": "نشست شما منقضی شده است. دوباره وارد شوید.",
+      "forbidden": "به این سازمان‌ها دسترسی ندارید.",
+      "network": "اتصال برقرار نشد. شبکه را بررسی و دوباره تلاش کنید.",
+      "unexpected": "بارگذاری سازمان‌ها ممکن نشد. دوباره تلاش کنید."
+    }
   },
   "auth": {
     "brandName": "AI Brand OS",

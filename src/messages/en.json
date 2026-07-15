@@ -67,9 +67,59 @@
   "organization": {
     "kicker": "Manage",
     "title": "Organization",
-    "subtitle": "Members, workspace and brand defaults.",
-    "members": "Members",
-    "invite": "Invite member"
+    "subtitle": "Your workspaces and their brand defaults.",
+    "add": "Add organization",
+    "form": {
+      "createTitle": "Add organization",
+      "createSubtitle": "Spin up another workspace. You become its owner.",
+      "editTitle": "Edit organization",
+      "editSubtitle": "Update this workspace's brand defaults.",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "submitCreate": "Create organization",
+      "submitEdit": "Save changes",
+      "fields": {
+        "name": "Organization name",
+        "namePlaceholder": "Acme Skincare Co.",
+        "industry": "Industry",
+        "industryPlaceholder": "Select an industry",
+        "companySize": "Company size",
+        "companySizePlaceholder": "Select a size",
+        "websiteUrl": "Website",
+        "websiteUrlPlaceholder": "https://acme.co",
+        "primaryRegion": "Primary region",
+        "primaryRegionPlaceholder": "United States",
+        "primaryLanguage": "Primary language",
+        "primaryLanguagePlaceholder": "Select a language"
+      },
+      "errors": {
+        "nameRequired": "Organization name is required.",
+        "industryRequired": "Select an industry.",
+        "companySizeRequired": "Select a company size.",
+        "websiteUrlInvalid": "Enter a valid URL, including https://.",
+        "primaryRegionRequired": "Primary region is required.",
+        "primaryLanguageRequired": "Select a primary language."
+      }
+    },
+    "list": {
+      "title": "Organizations",
+      "subtitle": "Every workspace you belong to.",
+      "empty": "You do not belong to any organization yet.",
+      "loading": "Loading organizations…",
+      "retry": "Try again"
+    },
+    "roles": {
+      "OWNER": "Owner",
+      "ADMIN": "Admin",
+      "EDITOR": "Editor",
+      "VIEWER": "Viewer"
+    },
+    "errors": {
+      "unauthorized": "Your session expired. Sign in again.",
+      "forbidden": "You do not have access to these organizations.",
+      "network": "Connection failed. Check your network and retry.",
+      "unexpected": "Could not load organizations. Please try again."
+    }
   },
   "auth": {
     "brandName": "AI Brand OS",

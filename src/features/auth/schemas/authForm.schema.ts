@@ -5,7 +5,7 @@ import {
   companySizeValues,
   industryValues,
   languageValues,
-} from "../utils/organizationOptions";
+} from "@/features/organizations/utils/organizationOptions";
 
 export type AuthMode = "signin" | "signup";
 
