@@ -4,6 +4,7 @@ import axios, {
 } from "axios";
 
 import { clearTokens } from "../../token-store";
+import { clearUser } from "../../user-store";
 import type { ResponseInterceptor } from "../http.types";
 import { refreshAccessToken } from "../token-refresher";
 import { DEFAULT_PUBLIC_ENDPOINTS, isPublicEndpoint } from "./auth.interceptor";
@@ -28,6 +29,7 @@ let redirecting = false;
 
 function defaultOnRefreshFailure(): void {
   clearTokens();
+  clearUser();
   if (typeof window === "undefined" || redirecting) return;
   redirecting = true;
   window.location.assign(LOGIN_REDIRECT_PATH);

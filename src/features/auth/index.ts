@@ -1,5 +1,6 @@
 export { AuthForm } from "./components/authForm";
 export {
+  useCurrentUser,
   useIsAuthenticated,
   useLogin,
   useLogout,

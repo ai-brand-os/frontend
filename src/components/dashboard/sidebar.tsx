@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import { useCurrentUser } from "@/features/auth";
 import { cn } from "@/lib/utils";
 
 export type NavKey =
@@ -28,12 +29,22 @@ export type SidebarLabels = Record<NavKey, string> & {
 };
 
 export type SidebarUser = {
+  /** Shown until the signed-in user hydrates from the client store, and when signed out. */
   name: string;
   role: string;
   progressLabel: string;
   progress: number;
   signOutLabel: string;
 };
+
+function toInitials(name: string): string {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase())
+    .slice(0, 2)
+    .join("");
+}
 
 // Deterministic waveform bar heights (percent of track height) — avoids
 // hydration mismatch that Math.random() would cause.
@@ -64,6 +75,8 @@ type SidebarProps = {
 
 export function Sidebar({ locale, labels, user }: SidebarProps) {
   const pathname = usePathname();
+  const currentUser = useCurrentUser();
+  const displayName = currentUser?.fullName ?? user.name;
 
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-e border-sidebar-border bg-sidebar md:flex">
@@ -155,15 +168,11 @@ export function Sidebar({ locale, labels, user }: SidebarProps) {
         {/* User */}
         <div className="flex items-center gap-2.5 px-1.5">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-ember font-heading text-[13px] font-semibold text-white">
-            {user.name
-              .split(" ")
-              .map((part) => part.charAt(0))
-              .slice(0, 2)
-              .join("")}
+            {toInitials(displayName)}
           </span>
           <div className="min-w-0 flex-1 leading-tight">
             <div className="truncate text-sm font-semibold text-sidebar-foreground">
-              {user.name}
+              {displayName}
             </div>
             <div className="truncate font-mono text-xs text-muted-foreground">
               {user.role}

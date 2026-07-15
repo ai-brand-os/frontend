@@ -3,7 +3,13 @@
 import { useSyncExternalStore } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { isAuthenticated, subscribeTokens } from "@/lib/api";
+import {
+  getUser,
+  isAuthenticated,
+  subscribeTokens,
+  subscribeUser,
+  type AuthUser,
+} from "@/lib/api";
 import { login, logout, signup } from "./auth.service";
 import type { LoginInput, SignupInput } from "./auth.types";
 
@@ -13,6 +19,15 @@ import type { LoginInput, SignupInput } from "./auth.types";
  */
 export function useIsAuthenticated(): boolean {
   return useSyncExternalStore(subscribeTokens, isAuthenticated, () => false);
+}
+
+/**
+ * The signed-in user, or `null` when signed out. Backed by the user store, so
+ * it re-renders on login/logout. Returns `null` during SSR (no `window`) to
+ * match the first client render.
+ */
+export function useCurrentUser(): AuthUser | null {
+  return useSyncExternalStore(subscribeUser, getUser, () => null);
 }
 
 /** Mutation wrapping `POST /auth/login`. On error, throws an `ApiError`. */
