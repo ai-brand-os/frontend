@@ -8,6 +8,7 @@ import { createWrapper } from "@/test/render";
 import { server } from "@/test/server";
 import { authMessagesFixture } from "@/test/fixtures/messages.fixture";
 import { buildAuthFormValues } from "@/test/factories/auth-form-values.factory";
+import { success } from "@/test/mocks/response-factories";
 import { router } from "@/test/utils/router";
 
 function setup(mode: "signin" | "signup" = "signin") {
@@ -122,7 +123,7 @@ describe("useAuthForm", () => {
     expect(result.current.form.formState.errors.company).toBeUndefined();
   });
 
-  it("redirects to the locale home page on a valid submit", async () => {
+  it("redirects to the dashboard of the org signup created", async () => {
     const { result } = setup("signup");
     const values = buildAuthFormValues();
 
@@ -135,6 +136,39 @@ describe("useAuthForm", () => {
       result.current.form.setValue("companySize", values.companySize!);
       result.current.form.setValue("region", values.region!);
       result.current.form.setValue("language", values.language!);
+    });
+    await act(() => result.current.onSubmit());
+
+    await waitFor(() =>
+      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+    );
+  });
+
+  it("redirects to the first organization's dashboard on signin", async () => {
+    const { result } = setup("signin");
+    const values = buildAuthFormValues();
+
+    act(() => {
+      result.current.form.setValue("email", values.email);
+      result.current.form.setValue("password", values.password);
+    });
+    await act(() => result.current.onSubmit());
+
+    await waitFor(() =>
+      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+    );
+  });
+
+  it("falls back to the locale home when the caller has no organization", async () => {
+    server.use(
+      http.get(`${getApiBaseUrl()}/organizations`, () => success([])),
+    );
+    const { result } = setup("signin");
+    const values = buildAuthFormValues();
+
+    act(() => {
+      result.current.form.setValue("email", values.email);
+      result.current.form.setValue("password", values.password);
     });
     await act(() => result.current.onSubmit());
 

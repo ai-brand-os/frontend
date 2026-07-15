@@ -16,7 +16,7 @@ import {
   companySizeValues,
   industryValues,
   languageValues,
-} from "../utils/organizationOptions";
+} from "@/features/organizations/utils/organizationOptions";
 import { cn } from "@/lib/utils";
 
 export type AuthFormViewProps = {
