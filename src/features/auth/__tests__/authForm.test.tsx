@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 
-import { AuthForm } from "@/components/auth/authForm";
+import { AuthForm } from "@/features/auth/components/authForm";
 import { renderWithProviders, screen } from "@/test/render";
 import { authMessagesFixture } from "@/test/fixtures/messages.fixture";
 import { router } from "@/test/utils/router";

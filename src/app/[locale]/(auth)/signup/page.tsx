@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AuthForm } from "@/components/auth/authForm";
+import { AuthForm } from "@/features/auth";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/dictionaries";
 

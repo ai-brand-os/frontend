@@ -20,7 +20,7 @@ type WrapperOptions = {
   queryClient?: QueryClient;
 };
 
-function createWrapper({ queryClient = createTestQueryClient() }: WrapperOptions) {
+export function createWrapper({ queryClient = createTestQueryClient() }: WrapperOptions = {}) {
   return function Wrapper({ children }: { children: ReactNode }) {
     return (
       <QueryClientProvider client={queryClient}>

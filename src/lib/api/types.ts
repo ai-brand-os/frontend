@@ -1,3 +1,10 @@
+/**
+ * The typed API error and its envelope now live in `./errors` (the single
+ * source of error parsing/typing). Re-exported here so existing imports from
+ * `./types` keep resolving.
+ */
+export { ApiError, type ApiErrorBody } from "./errors";
+
 /** Mirrors the backend `AuthUserView` returned by every auth endpoint. */
 export type AuthUser = {
   id: string;
@@ -19,26 +26,3 @@ export type AuthResult = {
   tokens: TokenPair;
 };
 
-/** Error envelope the backend emits: `{ success: false, error: { code, message } }`. */
-export type ApiErrorBody = {
-  success: false;
-  error: { code: string; message: string };
-};
-
-/**
- * Thrown by {@link apiFetch} for any non-2xx response (and for network
- * failures, with `status = 0`). Carries the backend's error `code` so callers
- * can branch on it (e.g. `INVALID_CREDENTIALS`, `EMAIL_ALREADY_REGISTERED`)
- * instead of matching on message text.
- */
-export class ApiError extends Error {
-  readonly status: number;
-  readonly code: string;
-
-  constructor(status: number, code: string, message: string) {
-    super(message);
-    this.name = "ApiError";
-    this.status = status;
-    this.code = code;
-  }
-}
