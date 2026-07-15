@@ -69,6 +69,10 @@
     "title": "Organization",
     "subtitle": "Your workspaces and their brand defaults.",
     "add": "Add organization",
+    "switcher": {
+      "trigger": "Switch organization",
+      "empty": "Create your first organization"
+    },
     "form": {
       "createTitle": "Add organization",
       "createSubtitle": "Spin up another workspace. You become its owner.",

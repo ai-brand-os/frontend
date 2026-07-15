@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 
 import { useCurrentUser } from "@/features/auth";
+import { OrganizationSwitcher } from "@/features/organizations";
+import type { Messages } from "@/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 
 export type NavKey =
@@ -69,11 +71,22 @@ const SECTIONS: { labelKey: "sectionMain" | "sectionManage"; items: NavKey[] }[]
 
 type SidebarProps = {
   locale: string;
+  /** The `[orgId]` segment of the current dashboard route. */
+  orgId: string;
   labels: SidebarLabels;
   user: SidebarUser;
+  organizationMessages: Messages["organization"];
+  industryLabels: Record<string, string>;
 };
 
-export function Sidebar({ locale, labels, user }: SidebarProps) {
+export function Sidebar({
+  locale,
+  orgId,
+  labels,
+  user,
+  organizationMessages,
+  industryLabels,
+}: SidebarProps) {
   const pathname = usePathname();
   const currentUser = useCurrentUser();
   const displayName = currentUser?.fullName ?? user.name;
@@ -89,6 +102,15 @@ export function Sidebar({ locale, labels, user }: SidebarProps) {
         </span>
       </div>
 
+      <div className="px-3 pb-1">
+        <OrganizationSwitcher
+          locale={locale}
+          orgId={orgId}
+          messages={organizationMessages}
+          industryLabels={industryLabels}
+        />
+      </div>
+
       <nav className="flex flex-1 flex-col gap-6 px-3 py-4">
         {SECTIONS.map((section) => (
           <div key={section.labelKey} className="flex flex-col gap-1">
@@ -97,7 +119,7 @@ export function Sidebar({ locale, labels, user }: SidebarProps) {
             </p>
             {section.items.map((key) => {
               const Icon = ICONS[key];
-              const href = `/${locale}/${key}`;
+              const href = `/${locale}/${orgId}/${key}`;
               const active =
                 pathname === href || pathname.startsWith(`${href}/`);
 

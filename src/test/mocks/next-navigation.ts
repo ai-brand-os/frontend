@@ -18,12 +18,28 @@ export const router = {
   prefetch: vi.fn(),
 };
 
+const DEFAULT_PATHNAME = "/";
+
+let pathname = DEFAULT_PATHNAME;
+
+/**
+ * Points `usePathname()` at a route for the current test. Reset to `/` after
+ * each test from `setup.ts`.
+ */
+export function setPathname(value: string) {
+  pathname = value;
+}
+
+export function resetPathname() {
+  pathname = DEFAULT_PATHNAME;
+}
+
 vi.mock("next/navigation", async (importOriginal) => {
   const actual = await importOriginal<typeof import("next/navigation")>();
   return {
     ...actual,
     useRouter: () => router,
-    usePathname: () => "/",
+    usePathname: () => pathname,
     useSearchParams: () => new URLSearchParams(),
     useParams: () => ({}),
   };

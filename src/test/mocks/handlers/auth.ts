@@ -6,15 +6,24 @@ import { success } from "@/test/mocks/response-factories";
 
 const base = getApiBaseUrl();
 
-/** A representative successful auth response, matching the backend `AuthResult`. */
+/**
+ * A representative successful auth response, matching the backend
+ * `AuthResult`. Login and refresh carry no `organizationId` — only signup,
+ * which creates one alongside the account.
+ */
 export const authResultFixture: AuthResult = {
   user: { id: "user_1", email: "founder@acme.dev", fullName: "Ada Lovelace" },
-  organizationId: "org_1",
   tokens: {
     accessToken: "access-token-1",
     refreshToken: "refresh-token-1",
     expiresIn: 900,
   },
+};
+
+/** `POST /auth/signup` — the same result plus the org created with the account. */
+export const signupResultFixture: AuthResult = {
+  ...authResultFixture,
+  organizationId: "org_1",
 };
 
 /**
@@ -24,7 +33,7 @@ export const authResultFixture: AuthResult = {
  */
 export const authHandlers = [
   http.post(`${base}/auth/login`, () => success(authResultFixture)),
-  http.post(`${base}/auth/signup`, () => success(authResultFixture, { status: 201 })),
+  http.post(`${base}/auth/signup`, () => success(signupResultFixture, { status: 201 })),
   http.post(`${base}/auth/refresh`, () => success(authResultFixture)),
   http.post(`${base}/auth/logout`, () => success(null, { status: 204 })),
 ];

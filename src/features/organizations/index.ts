@@ -1,6 +1,7 @@
 export { OrganizationView } from "./components/organizationView";
 export { OrganizationForm } from "./components/organizationForm";
 export { OrganizationList } from "./components/organizationList";
+export { OrganizationSwitcher } from "./components/organizationSwitcher";
 export type { OrganizationOptionLabels } from "./components/organizationOptionLabels";
 export { useOrganizationForm } from "./hooks/useOrganizationForm";
 export {

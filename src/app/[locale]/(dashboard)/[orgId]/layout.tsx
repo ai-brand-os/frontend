@@ -8,14 +8,14 @@ import { getMessages } from "@/i18n/dictionaries";
 
 type DashboardLayoutProps = Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string; orgId: string }>;
 }>;
 
 export default async function DashboardLayout({
   children,
   params,
 }: DashboardLayoutProps) {
-  const { locale } = await params;
+  const { locale, orgId } = await params;
 
   if (!isLocale(locale)) {
     notFound();
@@ -39,7 +39,10 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen flex-1 bg-background">
       <Sidebar
         locale={locale}
+        orgId={orgId}
         labels={sidebarLabels}
+        organizationMessages={messages.organization}
+        industryLabels={messages.auth.industries}
         user={{
           name: nav.userName,
           role: nav.userRole,

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 import { AuthForm } from "@/features/auth/components/authForm";
-import { renderWithProviders, screen } from "@/test/render";
+import { renderWithProviders, screen, waitFor } from "@/test/render";
 import { authMessagesFixture } from "@/test/fixtures/messages.fixture";
 import { router } from "@/test/utils/router";
 
@@ -108,7 +108,7 @@ describe("AuthForm", () => {
     expect(router.push).not.toHaveBeenCalled();
   });
 
-  it("submits successfully and navigates home with valid input", async () => {
+  it("submits successfully and navigates to the first org's dashboard", async () => {
     const user = userEvent.setup();
     renderAuthForm("signin");
 
@@ -124,8 +124,9 @@ describe("AuthForm", () => {
       screen.getByRole("button", { name: authMessagesFixture.signin.cta }),
     );
 
-    await screen.findByRole("button", { name: authMessagesFixture.signin.cta });
-    expect(router.push).toHaveBeenCalledWith("/en");
+    await waitFor(() =>
+      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+    );
   });
 
   it("shows the forgot-password link in signin mode", () => {
