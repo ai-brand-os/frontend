@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
+function getInitialIsDark() {
+  return (
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark")
+  );
+}
 
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
+export function ThemeToggle() {
+  const [isDark, setIsDark] = useState(getInitialIsDark);
 
   const toggle = () => {
     const next = !isDark;

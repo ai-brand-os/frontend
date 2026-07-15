@@ -63,11 +63,13 @@ const ICONS: Record<NavKey, LucideIcon> = {
   settings: Settings,
 };
 
-const SECTIONS: { labelKey: "sectionMain" | "sectionManage"; items: NavKey[] }[] =
-  [
-    { labelKey: "sectionMain", items: ["dashboard", "products", "insights"] },
-    { labelKey: "sectionManage", items: ["organization", "settings"] },
-  ];
+const SECTIONS: {
+  labelKey: "sectionMain" | "sectionManage";
+  items: NavKey[];
+}[] = [
+  { labelKey: "sectionMain", items: ["dashboard", "products", "insights"] },
+  { labelKey: "sectionManage", items: ["organization", "settings"] },
+];
 
 type SidebarProps = {
   locale: string;
@@ -93,16 +95,7 @@ export function Sidebar({
 
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-e border-sidebar-border bg-sidebar md:flex">
-      <div className="flex h-16 items-center gap-2.5 px-5">
-        <span className="flex size-7 items-center justify-center rounded-lg bg-pulse font-heading text-[15px] font-bold text-primary-foreground">
-          B
-        </span>
-        <span className="text-[15px] font-semibold tracking-tight text-sidebar-foreground">
-          {labels.brand}
-        </span>
-      </div>
-
-      <div className="px-3 pb-1">
+      <div className="px-3 py-1">
         <OrganizationSwitcher
           locale={locale}
           orgId={orgId}
