@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "@base-ui/react/menu";
@@ -46,18 +46,23 @@ export function OrganizationSwitcher({
   const pathname = usePathname();
   const { data, isPending, isError, error } = useOrganizations();
 
-  const organizations = data ?? [];
-  const current = organizations.find(
-    (organization) => organization.id === orgId,
-  );
+  const organizations = useMemo(() => {
+    return data ?? [];
+  }, [data]);
+  const current = useMemo(() => {
+    if (!orgId && organizations.length) {
+      return organizations[0];
+    }
+    return organizations.find((organization) => organization.id === orgId);
+  }, [organizations, orgId]);
   const firstOrgId = organizations[0]?.id;
 
   useEffect(() => {
-    if (current || !firstOrgId) {
+    if (!orgId || current || !firstOrgId) {
       return;
     }
     router.replace(withOrgId(pathname, firstOrgId));
-  }, [current, firstOrgId, pathname, router]);
+  }, [orgId, current, firstOrgId, pathname, router]);
 
   if (isError) {
     return (
@@ -184,7 +189,7 @@ export function OrganizationSwitcher({
             <div aria-hidden className="my-1.5 h-px bg-border" />
 
             <Menu.Item
-              render={<Link href={`/${locale}/${orgId}/organization`} />}
+              render={<Link href={`/${locale}/dashboard/organization`} />}
               className="flex h-9 cursor-pointer items-center gap-2.5 rounded-md px-2 text-[13px] font-semibold text-pulse-ink no-underline outline-none data-[highlighted]:bg-pulse-soft"
             >
               <Plus className="size-4 shrink-0" />

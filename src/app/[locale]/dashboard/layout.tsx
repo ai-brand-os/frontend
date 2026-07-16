@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Search } from "lucide-react";
 
-import { Sidebar, type SidebarLabels } from "@/components/dashboard/sidebar";
+import { Sidebar } from "@/components/dashboard/Sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/dictionaries";
@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   children,
   params,
 }: DashboardLayoutProps) {
-  const { locale, orgId } = await params;
+  const { locale } = await params;
 
   if (!isLocale(locale)) {
     notFound();
@@ -24,33 +24,9 @@ export default async function DashboardLayout({
   const messages = getMessages(locale as Locale);
   const nav = messages.nav;
 
-  const sidebarLabels: SidebarLabels = {
-    brand: nav.brand,
-    sectionMain: nav.sectionMain,
-    sectionManage: nav.sectionManage,
-    dashboard: nav.dashboard,
-    products: nav.products,
-    insights: nav.insights,
-    organization: nav.organization,
-    settings: nav.settings,
-  };
-
   return (
     <div className="flex min-h-screen flex-1 bg-background">
-      <Sidebar
-        locale={locale}
-        orgId={orgId}
-        labels={sidebarLabels}
-        organizationMessages={messages.organization}
-        industryLabels={messages.auth.industries}
-        user={{
-          name: nav.userName,
-          role: nav.userRole,
-          progressLabel: messages.dashboard.completenessTitle,
-          progress: 74,
-          signOutLabel: nav.signOut,
-        }}
-      />
+      <Sidebar locale={locale} />
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex h-16 items-center gap-4 border-b border-border px-5 sm:px-8">
