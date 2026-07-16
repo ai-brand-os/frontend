@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { OrganizationView } from "@/features/organizations";
+import { OrganizationListView } from "@/features/organizations";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getMessages } from "@/i18n/dictionaries";
 
@@ -21,13 +21,10 @@ export default async function OrganizationPage({ params }: PageProps) {
   const messages = getMessages(locale as Locale);
 
   return (
-    <OrganizationView
+    <OrganizationListView
+      locale={locale}
       messages={messages.organization}
-      optionLabels={{
-        industries: messages.auth.industries,
-        companySizes: messages.auth.companySizes,
-        languages: messages.auth.languages,
-      }}
+      industryLabels={messages.auth.industries}
     />
   );
 }

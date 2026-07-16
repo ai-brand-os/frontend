@@ -1,32 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import type { Messages } from "@/i18n/dictionaries";
-import type { Organization } from "../api";
-import { OrganizationForm } from "./organizationForm";
 import { OrganizationList } from "./organizationList";
-import type { OrganizationOptionLabels } from "./organizationOptionLabels";
 
-/** Which form is open, or `null` when only the list is shown. */
-type FormState =
-  | { mode: "create" }
-  | { mode: "edit"; organization: Organization }
-  | null;
-
-type OrganizationViewProps = {
+type OrganizationListViewProps = {
+  locale: string;
   messages: Messages["organization"];
-  optionLabels: OrganizationOptionLabels;
+  industryLabels: Record<string, string>;
 };
 
-export function OrganizationView({
+/** Landing page for org management: header, "add" link and the list itself. */
+export function OrganizationListView({
+  locale,
   messages,
-  optionLabels,
-}: OrganizationViewProps) {
-  const [formState, setFormState] = useState<FormState>(null);
-  const closeForm = () => setFormState(null);
+  industryLabels,
+}: OrganizationListViewProps) {
+  const router = useRouter();
+  const basePath = `/${locale}/dashboard/organization`;
 
   return (
     <div className="mx-auto w-full max-w-[880px] px-5 py-8 sm:px-8">
@@ -43,27 +38,14 @@ export function OrganizationView({
           </p>
         </div>
         <Button
+          nativeButton={false}
           className="h-10 gap-1.5 px-4 text-sm font-semibold"
-          onClick={() => setFormState({ mode: "create" })}
+          render={<Link href={`${basePath}/new`} />}
         >
           <Plus className="size-4" />
           {messages.add}
         </Button>
       </div>
-
-      {formState && (
-        <OrganizationForm
-          key={formState.mode === "edit" ? formState.organization.id : "create"}
-          mode={formState.mode}
-          organization={
-            formState.mode === "edit" ? formState.organization : undefined
-          }
-          messages={messages}
-          optionLabels={optionLabels}
-          onCancel={closeForm}
-          onSuccess={closeForm}
-        />
-      )}
 
       <section className="rounded-xl border border-border bg-card">
         <div className="px-5 pt-5 pb-4">
@@ -76,8 +58,10 @@ export function OrganizationView({
         </div>
         <OrganizationList
           messages={messages}
-          industryLabels={optionLabels.industries}
-          onEdit={(organization) => setFormState({ mode: "edit", organization })}
+          industryLabels={industryLabels}
+          onEdit={(organization) =>
+            router.push(`${basePath}/${organization.id}/edit`)
+          }
         />
       </section>
     </div>

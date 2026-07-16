@@ -189,7 +189,7 @@ export function OrganizationSwitcher({
             <div aria-hidden className="my-1.5 h-px bg-border" />
 
             <Menu.Item
-              render={<Link href={`/${locale}/dashboard/organization`} />}
+              render={<Link href={`/${locale}/dashboard/organization/new`} />}
               className="flex h-9 cursor-pointer items-center gap-2.5 rounded-md px-2 text-[13px] font-semibold text-pulse-ink no-underline outline-none data-[highlighted]:bg-pulse-soft"
             >
               <Plus className="size-4 shrink-0" />
