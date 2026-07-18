@@ -102,7 +102,9 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
       const organizationId = await resolveOrganizationId(result.organizationId);
 
       router.push(
-        organizationId ? `/${locale}/${organizationId}/dashboard` : `/${locale}`,
+        organizationId
+          ? `/${locale}/dashboard/${organizationId}/`
+          : `/${locale}/dashboard`,
       );
     } catch (error) {
       form.setError("root", {
