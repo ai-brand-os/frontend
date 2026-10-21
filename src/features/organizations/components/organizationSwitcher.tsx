@@ -20,10 +20,23 @@ type OrganizationSwitcherProps = {
 };
 
 /** Swaps the `[orgId]` segment of a dashboard path for another org's id. */
-function withOrgId(pathname: string, orgId: string): string {
+function withOrgId(
+  pathname: string,
+  locale: string,
+  currentOrgId: string,
+  orgId: string,
+): string {
   const segments = pathname.split("/");
-  segments[3] = orgId;
-  return segments.join("/");
+  if (
+    currentOrgId &&
+    segments[1] === locale &&
+    segments[2] === "dashboard" &&
+    segments[3] === currentOrgId
+  ) {
+    segments[3] = orgId;
+    return segments.join("/");
+  }
+  return `/${locale}/dashboard/${orgId}`;
 }
 
 function toInitial(name: string): string {
@@ -61,8 +74,8 @@ export function OrganizationSwitcher({
     if (!orgId || current || !firstOrgId) {
       return;
     }
-    router.replace(withOrgId(pathname, firstOrgId));
-  }, [orgId, current, firstOrgId, pathname, router]);
+    router.replace(withOrgId(pathname, locale, orgId, firstOrgId));
+  }, [orgId, current, firstOrgId, pathname, locale, router]);
 
   if (isError) {
     return (
@@ -92,7 +105,7 @@ export function OrganizationSwitcher({
 
     return (
       <Link
-        href={`/${locale}/${orgId}/organization`}
+        href={`/${locale}/dashboard/organization/new`}
         className="flex h-11 items-center gap-2.5 rounded-lg px-2 text-[13px] font-semibold text-pulse-ink transition-colors hover:bg-sidebar-accent/60"
       >
         <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-pulse-soft">
@@ -153,7 +166,14 @@ export function OrganizationSwitcher({
                   <Menu.Item
                     key={organization.id}
                     render={
-                      <Link href={withOrgId(pathname, organization.id)} />
+                      <Link
+                        href={withOrgId(
+                          pathname,
+                          locale,
+                          orgId,
+                          organization.id,
+                        )}
+                      />
                     }
                     className={cn(
                       "flex h-10 cursor-pointer items-center gap-2.5 rounded-md px-2 no-underline outline-none",

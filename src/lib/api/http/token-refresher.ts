@@ -1,4 +1,4 @@
-import { getRefreshToken, setTokens } from "../token-store";
+import { getCredentialEpoch, getRefreshToken, setTokens } from "../token-store";
 import type { AuthResult } from "../types";
 import { createAxiosInstance, createHttpClient } from "./http.client";
 import { getDefaultHttpConfig } from "./http.config";
@@ -19,8 +19,10 @@ const refreshClient = createHttpClient(
  * token as theft, revoking the whole family.
  */
 let refreshPromise: Promise<boolean> | null = null;
+let refreshEpoch: number | null = null;
 
 async function performRefresh(): Promise<boolean> {
+  const epoch = getCredentialEpoch();
   const refreshToken = getRefreshToken();
   if (!refreshToken) return false;
 
@@ -28,6 +30,9 @@ async function performRefresh(): Promise<boolean> {
     const result = await refreshClient.post<AuthResult>("/auth/refresh", {
       refreshToken,
     });
+    // A logout/account transition must not be undone by an older refresh.
+    if (epoch !== getCredentialEpoch() || getRefreshToken() !== refreshToken)
+      return false;
     setTokens(result.tokens);
     return true;
   } catch {
@@ -42,8 +47,15 @@ async function performRefresh(): Promise<boolean> {
  * is cleared once settled so the next 401 can start a new refresh.
  */
 export function refreshAccessToken(): Promise<boolean> {
-  refreshPromise ??= performRefresh().finally(() => {
-    refreshPromise = null;
+  const epoch = getCredentialEpoch();
+  if (refreshPromise && refreshEpoch === epoch) return refreshPromise;
+  refreshEpoch = epoch;
+  const promise = performRefresh().finally(() => {
+    if (refreshPromise === promise) {
+      refreshPromise = null;
+      refreshEpoch = null;
+    }
   });
-  return refreshPromise;
+  refreshPromise = promise;
+  return promise;
 }

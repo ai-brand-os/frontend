@@ -1,5 +1,8 @@
 "use client";
 
+import { getUser } from "@/lib/api";
+import { getCredentialEpoch } from "@/lib/api/token-store";
+
 import {
   keepPreviousData,
   useMutation,
@@ -79,22 +82,39 @@ export function useCreateOrganization() {
 export function useUpdateOrganization(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: UpdateOrganizationInput) => updateOrganization(id, input),
+    mutationFn: (input: UpdateOrganizationInput) =>
+      updateOrganization(id, input),
     onMutate: async (input: UpdateOrganizationInput) => {
+      const epoch = getCredentialEpoch();
+      const principalId = getUser()?.id;
       const detailKey = organizationKeys.detail(id);
       await queryClient.cancelQueries({ queryKey: detailKey });
+      if (epoch !== getCredentialEpoch())
+        return { epoch, principalId, previous: undefined };
       const previous = queryClient.getQueryData<Organization>(detailKey);
       if (previous) {
-        queryClient.setQueryData<Organization>(detailKey, { ...previous, ...input });
+        queryClient.setQueryData<Organization>(detailKey, {
+          ...previous,
+          ...input,
+        });
       }
-      return { previous };
+      return { previous, epoch, principalId };
     },
     onError: (_error, _input, context) => {
-      if (context?.previous) {
+      if (
+        context?.previous &&
+        context.epoch === getCredentialEpoch() &&
+        context.principalId === getUser()?.id
+      ) {
         queryClient.setQueryData(organizationKeys.detail(id), context.previous);
       }
     },
-    onSettled: () => {
+    onSettled: (_data, _error, _input, context) => {
+      if (
+        context?.epoch !== getCredentialEpoch() ||
+        context.principalId !== getUser()?.id
+      )
+        return;
       queryClient.invalidateQueries({ queryKey: organizationKeys.detail(id) });
       queryClient.invalidateQueries({ queryKey: organizationKeys.lists() });
     },

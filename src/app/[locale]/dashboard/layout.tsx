@@ -8,7 +8,7 @@ import { getMessages } from "@/i18n/dictionaries";
 
 type DashboardLayoutProps = Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string; orgId: string }>;
+  params: Promise<{ locale: string }>;
 }>;
 
 export default async function DashboardLayout({
@@ -25,7 +25,7 @@ export default async function DashboardLayout({
   const nav = messages.nav;
 
   return (
-    <div className="flex min-h-screen flex-1 bg-background">
+    <div className="flex min-h-screen flex-1 flex-col bg-background md:flex-row">
       <Sidebar locale={locale} />
 
       <div className="flex min-w-0 flex-1 flex-col">

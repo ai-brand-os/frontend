@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MutationCache,
   QueryCache,
@@ -9,7 +9,14 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { ApiError, toDeveloperMessage } from "@/lib/api";
+import {
+  ApiError,
+  getUser,
+  isAuthenticated,
+  subscribeTokens,
+  subscribeUser,
+  toDeveloperMessage,
+} from "@/lib/api";
 
 /**
  * Retry policy: never retry client errors (4xx) — they won't succeed on
@@ -54,6 +61,22 @@ export function Providers({ children }: { children: React.ReactNode }) {
         },
       }),
   );
+
+  useEffect(() => {
+    let principalId = getUser()?.id;
+    const unsubscribeUser = subscribeUser(() => {
+      const nextPrincipalId = getUser()?.id;
+      if (nextPrincipalId !== principalId) queryClient.clear();
+      principalId = nextPrincipalId;
+    });
+    const unsubscribeTokens = subscribeTokens(() => {
+      if (!isAuthenticated()) queryClient.clear();
+    });
+    return () => {
+      unsubscribeUser();
+      unsubscribeTokens();
+    };
+  }, [queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>

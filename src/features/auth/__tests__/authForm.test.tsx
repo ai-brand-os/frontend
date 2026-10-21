@@ -125,7 +125,7 @@ describe("AuthForm", () => {
     );
 
     await waitFor(() =>
-      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+      expect(router.push).toHaveBeenCalledWith("/en/dashboard/org_1"),
     );
   });
 

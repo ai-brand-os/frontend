@@ -103,8 +103,8 @@ export function useAuthForm({ mode, locale, messages }: UseAuthFormArgs) {
 
       router.push(
         organizationId
-          ? `/${locale}/dashboard/${organizationId}/`
-          : `/${locale}/dashboard`,
+          ? `/${locale}/dashboard/${organizationId}`
+          : `/${locale}/dashboard/organization/new`,
       );
     } catch (error) {
       form.setError("root", {

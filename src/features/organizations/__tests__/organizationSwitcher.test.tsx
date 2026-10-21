@@ -14,10 +14,10 @@ const messages = getMessages("en");
 const t = messages.organization;
 const base = getApiBaseUrl();
 
-function renderSwitcher(orgId = "org_1") {
+function renderSwitcher(orgId = "org_1", locale: "en" | "fa" = "en") {
   renderWithProviders(
     <OrganizationSwitcher
-      locale="en"
+      locale={locale}
       orgId={orgId}
       messages={t}
       industryLabels={messages.auth.industries}
@@ -27,7 +27,7 @@ function renderSwitcher(orgId = "org_1") {
 
 describe("OrganizationSwitcher", () => {
   beforeEach(() => {
-    setPathname("/en/org_1/dashboard");
+    setPathname("/en/dashboard/org_1");
   });
 
   it("shows a busy placeholder while the organization list is in flight", () => {
@@ -56,7 +56,7 @@ describe("OrganizationSwitcher", () => {
 
     expect(
       await screen.findByRole("menuitem", { name: /Northwind Labs/ }),
-    ).toHaveAttribute("href", "/en/org_2/dashboard");
+    ).toHaveAttribute("href", "/en/dashboard/org_2");
   });
 
   it("offers creating an organization from the menu", async () => {
@@ -69,7 +69,7 @@ describe("OrganizationSwitcher", () => {
 
     expect(
       await screen.findByRole("menuitem", { name: t.form.submitCreate }),
-    ).toHaveAttribute("href", "/en/org_1/organization");
+    ).toHaveAttribute("href", "/en/dashboard/organization/new");
   });
 
   it("does not open a menu when the caller belongs to a single org", async () => {
@@ -91,7 +91,7 @@ describe("OrganizationSwitcher", () => {
     renderSwitcher("org_missing");
 
     await waitFor(() => {
-      expect(router.replace).toHaveBeenCalledWith("/en/org_1/dashboard");
+      expect(router.replace).toHaveBeenCalledWith("/en/dashboard/org_1");
     });
   });
 
@@ -100,10 +100,9 @@ describe("OrganizationSwitcher", () => {
 
     renderSwitcher("org_missing");
 
-    expect(await screen.findByRole("link", { name: t.switcher.empty })).toHaveAttribute(
-      "href",
-      "/en/org_missing/organization",
-    );
+    expect(
+      await screen.findByRole("link", { name: t.switcher.empty }),
+    ).toHaveAttribute("href", "/en/dashboard/organization/new");
     expect(router.replace).not.toHaveBeenCalled();
   });
 
@@ -114,4 +113,26 @@ describe("OrganizationSwitcher", () => {
 
     expect(await screen.findByText(t.errors.unexpected)).toBeInTheDocument();
   });
+});
+
+it.each(["en", "fa"] as const)(
+  "switches from an organization management page without corrupting it (%s)",
+  async (locale) => {
+    setPathname(`/${locale}/dashboard/organization/org_1/edit`);
+    renderSwitcher("", locale);
+    await userEvent.click(
+      await screen.findByRole("button", { name: t.switcher.trigger }),
+    );
+    expect(
+      await screen.findByRole("menuitem", { name: /Northwind Labs/ }),
+    ).toHaveAttribute("href", `/${locale}/dashboard/org_2`);
+  },
+);
+
+it("preserves the scoped suffix when correcting a missing organization", async () => {
+  setPathname("/fa/dashboard/org_missing");
+  renderSwitcher("org_missing", "fa");
+  await waitFor(() =>
+    expect(router.replace).toHaveBeenCalledWith("/fa/dashboard/org_1"),
+  );
 });

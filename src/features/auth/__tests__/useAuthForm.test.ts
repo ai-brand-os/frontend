@@ -11,7 +11,10 @@ import { buildAuthFormValues } from "@/test/factories/auth-form-values.factory";
 import { success } from "@/test/mocks/response-factories";
 import { router } from "@/test/utils/router";
 
-function setup(mode: "signin" | "signup" = "signin") {
+function setup(
+  mode: "signin" | "signup" = "signin",
+  locale: "en" | "fa" = "en",
+) {
   // react-hook-form's formState is a Proxy that only starts tracking (and
   // therefore updating) a field once something reads it during render — in
   // the real app that read happens inside AppForm/FormInput. Reading
@@ -19,7 +22,11 @@ function setup(mode: "signin" | "signup" = "signin") {
   // the same updates a mounted form would.
   return renderHook(
     () => {
-      const result = useAuthForm({ mode, locale: "en", messages: authMessagesFixture });
+      const result = useAuthForm({
+        mode,
+        locale,
+        messages: authMessagesFixture,
+      });
       void result.form.formState.errors;
       return result;
     },
@@ -140,7 +147,7 @@ describe("useAuthForm", () => {
     await act(() => result.current.onSubmit());
 
     await waitFor(() =>
-      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+      expect(router.push).toHaveBeenCalledWith("/en/dashboard/org_1"),
     );
   });
 
@@ -155,14 +162,12 @@ describe("useAuthForm", () => {
     await act(() => result.current.onSubmit());
 
     await waitFor(() =>
-      expect(router.push).toHaveBeenCalledWith("/en/org_1/dashboard"),
+      expect(router.push).toHaveBeenCalledWith("/en/dashboard/org_1"),
     );
   });
 
-  it("falls back to the locale home when the caller has no organization", async () => {
-    server.use(
-      http.get(`${getApiBaseUrl()}/organizations`, () => success([])),
-    );
+  it("falls back to organization creation when the caller has no organization", async () => {
+    server.use(http.get(`${getApiBaseUrl()}/organizations`, () => success([])));
     const { result } = setup("signin");
     const values = buildAuthFormValues();
 
@@ -172,14 +177,21 @@ describe("useAuthForm", () => {
     });
     await act(() => result.current.onSubmit());
 
-    await waitFor(() => expect(router.push).toHaveBeenCalledWith("/en"));
+    await waitFor(() =>
+      expect(router.push).toHaveBeenCalledWith(
+        "/en/dashboard/organization/new",
+      ),
+    );
   });
 
   it("surfaces a root error when the API rejects the credentials", async () => {
     server.use(
       http.post(`${getApiBaseUrl()}/auth/login`, () =>
         HttpResponse.json(
-          { success: false, error: { code: "INVALID_CREDENTIALS", message: "nope" } },
+          {
+            success: false,
+            error: { code: "INVALID_CREDENTIALS", message: "nope" },
+          },
           { status: 401 },
         ),
       ),
@@ -201,3 +213,22 @@ describe("useAuthForm", () => {
     expect(router.push).not.toHaveBeenCalled();
   });
 });
+
+it.each([false, true])(
+  "uses localized Persian routes after signin (empty=%s)",
+  async (empty) => {
+    if (empty)
+      server.use(
+        http.get(`${getApiBaseUrl()}/organizations`, () => success([])),
+      );
+    const { result } = setup("signin", "fa");
+    act(() => {
+      result.current.form.setValue("email", "founder@acme.dev");
+      result.current.form.setValue("password", "long-enough-pass");
+    });
+    await act(() => result.current.onSubmit());
+    expect(router.push).toHaveBeenCalledWith(
+      empty ? "/fa/dashboard/organization/new" : "/fa/dashboard/org_1",
+    );
+  },
+);

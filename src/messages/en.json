@@ -25,6 +25,7 @@
     "newBrand": "New brand",
     "toggleTheme": "Toggle theme",
     "signOut": "Sign out",
+    "signOutFailed": "Signed out on this device. Server revocation could not be confirmed; your existing access token may remain valid until expiry.",
     "userName": "Jordan Diaz",
     "userRole": "Owner"
   },

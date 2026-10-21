@@ -32,25 +32,33 @@ export function useCurrentUser(): AuthUser | null {
 
 /** Mutation wrapping `POST /auth/login`. On error, throws an `ApiError`. */
 export function useLogin() {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: LoginInput) => login(input),
+    mutationFn: (input: LoginInput) => {
+      queryClient.clear();
+      return login(input);
+    },
   });
 }
 
 /** Mutation wrapping `POST /auth/signup`. */
 export function useSignup() {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: SignupInput) => signup(input),
+    mutationFn: (input: SignupInput) => {
+      queryClient.clear();
+      return signup(input);
+    },
   });
 }
 
-/** Mutation wrapping `POST /auth/logout`. Clears cached queries afterwards. */
+/** Clears cached principal data before attempting server logout. */
 export function useLogout() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => logout(),
-    onSuccess: () => {
+    mutationFn: () => {
       queryClient.clear();
+      return logout();
     },
   });
 }

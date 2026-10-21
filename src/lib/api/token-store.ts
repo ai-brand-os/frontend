@@ -15,6 +15,12 @@ const REFRESH_KEY = "abos.refreshToken";
 let accessToken: string | null = null;
 let refreshToken: string | null = null;
 let hydrated = false;
+let credentialEpoch = 0;
+
+/** Changes when local credentials are cleared, fencing older requests. */
+export function getCredentialEpoch(): number {
+  return credentialEpoch;
+}
 
 type Listener = () => void;
 const listeners = new Set<Listener>();
@@ -37,7 +43,9 @@ export function getRefreshToken(): string | null {
 }
 
 /** Persists a freshly issued pair from login / signup / refresh. */
-export function setTokens(tokens: Pick<TokenPair, "accessToken" | "refreshToken">): void {
+export function setTokens(
+  tokens: Pick<TokenPair, "accessToken" | "refreshToken">,
+): void {
   hydrate();
   accessToken = tokens.accessToken;
   refreshToken = tokens.refreshToken;
@@ -50,6 +58,7 @@ export function setTokens(tokens: Pick<TokenPair, "accessToken" | "refreshToken"
 
 /** Drops all tokens — on logout, or when a refresh attempt is rejected. */
 export function clearTokens(): void {
+  credentialEpoch += 1;
   hydrate();
   accessToken = null;
   refreshToken = null;

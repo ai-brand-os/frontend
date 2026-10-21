@@ -14,23 +14,23 @@ type SidebarProps = {
 
 export function Sidebar({ locale }: SidebarProps) {
   const params = useParams();
-  const { orgId } = params;
+  const orgId = typeof params.orgId === "string" ? params.orgId : "";
 
   const messages = getMessages(locale as Locale);
   const nav = messages.nav;
 
   return (
-    <aside className="hidden w-60 shrink-0 flex-col border-e border-sidebar-border bg-sidebar md:flex">
+    <aside className="flex w-full shrink-0 flex-col border-b border-sidebar-border bg-sidebar md:w-60 md:border-e md:border-b-0">
       <div className="px-3 py-1">
         <OrganizationSwitcher
           locale={locale}
-          orgId={orgId as string}
+          orgId={orgId}
           messages={messages.organization}
           industryLabels={messages.auth.industries}
         />
       </div>
 
-      <SidebarMenus locale={locale} orgId={orgId as string} />
+      <SidebarMenus locale={locale} orgId={orgId} />
 
       <div className="flex flex-col gap-3 p-3">
         <SidebarBrandCompleteness
@@ -41,6 +41,8 @@ export function Sidebar({ locale }: SidebarProps) {
           }}
         />
         <SidebarUserSection
+          locale={locale}
+          logoutFailureLabel={nav.signOutFailed}
           user={{
             name: nav.userName,
             role: nav.userRole,

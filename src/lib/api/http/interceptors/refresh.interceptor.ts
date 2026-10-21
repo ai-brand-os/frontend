@@ -3,7 +3,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from "axios";
 
-import { clearTokens } from "../../token-store";
+import { clearTokens, getCredentialEpoch } from "../../token-store";
 import { clearUser } from "../../user-store";
 import type { ResponseInterceptor } from "../http.types";
 import { refreshAccessToken } from "../token-refresher";
@@ -13,7 +13,10 @@ import { DEFAULT_PUBLIC_ENDPOINTS, isPublicEndpoint } from "./auth.interceptor";
 const LOGIN_REDIRECT_PATH = "/";
 
 /** Request config carrying the one-retry marker that prevents infinite loops. */
-type RetriableRequestConfig = InternalAxiosRequestConfig & { _retry?: boolean };
+type RetriableRequestConfig = InternalAxiosRequestConfig & {
+  _retry?: boolean;
+  _credentialEpoch?: number;
+};
 
 export interface RefreshInterceptorOptions {
   /** Replays the original request (typically the owning instance's `request`). */
@@ -72,9 +75,12 @@ export function createRefreshInterceptor(
         throw error;
       }
 
+      const epoch = config._credentialEpoch;
+      if (epoch !== getCredentialEpoch()) throw error;
       config._retry = true;
 
       const refreshed = await refreshAccessToken();
+      if (epoch !== getCredentialEpoch()) throw error;
       if (!refreshed) {
         onRefreshFailure();
         throw error;

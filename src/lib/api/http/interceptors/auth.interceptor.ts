@@ -1,4 +1,4 @@
-import { getAccessToken } from "../../token-store";
+import { getAccessToken, getCredentialEpoch } from "../../token-store";
 import type { RequestInterceptor } from "../http.types";
 
 /**
@@ -39,6 +39,9 @@ export function createAuthInterceptor(
     onFulfilled: (config) => {
       if (isPublicEndpoint(config.url, publicEndpoints)) return config;
 
+      (
+        config as typeof config & { _credentialEpoch?: number }
+      )._credentialEpoch = getCredentialEpoch();
       const accessToken = getAccessToken();
       if (accessToken) {
         config.headers.set("Authorization", `Bearer ${accessToken}`);
